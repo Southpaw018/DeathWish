@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -34,15 +35,11 @@ public class DeathWish extends JavaPlugin {
 
 	//Logging
 	public boolean logToFile = true;
-	public String logFile = "logofheroes.csv";
+	public boolean dailyFile = true;
+	public String logFile = "deathlog.csv";
 
 	//Messages
-	public HashMap<String, Object> messages = new HashMap<String, Object>() {
-		private static final long serialVersionUID = 1L;
-		{
-			put("Misc.Other", "Unknown");
-		}
-	};
+	public HashMap<String, List<String>> messages = new HashMap<String, List<String>>();
 
 	//Config versioning
 	private int configVer = 0;
@@ -93,13 +90,23 @@ public class DeathWish extends JavaPlugin {
 		timeFormat = config.getString("Core.timeFormat", timeFormat);
 		versionCheck = config.getBoolean("Core.versionCheck", versionCheck);
 
-		logToFile = config.getBoolean("Log.logToFile", logToFile);
-		logFile = config.getString("Log.logFile", logFile);
+		logToFile = config.getBoolean("Logging.logToFile", logToFile);
+		dailyFile = config.getBoolean("Logging.dailyFile", dailyFile);
+		logFile = config.getString("Logging.logFile", logFile);
 
 		try {
-			messages = (HashMap<String, Object>)config.getConfigurationSection("messages").getValues(true);
+			Set<String> typeSet = config.getConfigurationSection("Messages").getKeys(false);
+			for (String type : typeSet) {
+				Set<String> subSet = config.getConfigurationSection("Messages." + type).getKeys(false);
+				for (String key : subSet) {
+					messages.put(key, config.getStringList("Messages." + type + "." + key));
+				}
+			}
 		} catch (NullPointerException e) {
 			log.warning("[DeathWish] Configuration failure while loading deathMessages. Using defaults.");
+		} catch (Exception e) {
+			log.severe("[DeathWish] Configuration failure while loading deathMessages. Shutting down.");
+			pm.disablePlugin(this);
 		}
 	}
 

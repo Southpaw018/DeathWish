@@ -1,0 +1,105 @@
+Core:
+    alwaysBroadcast: true
+    quietWorlds:
+        #- world1
+    broadcastWorlds:
+        #- world1
+    #For formatting, see http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html
+    dateFormat: "MM/dd/yyyy"
+    timeFormat: "hh:mm a"
+    versionCheck: true
+Logging:
+    logToFile: true
+    dailyFile: true
+    logFile: deathlog.csv
+Messages:
+#Accepted variables:
+# %d holds the name of the dead player.
+# %a holds the name of the attacking entity (player or monster) for PVP and Monster deaths.
+# %i holds the name of the attacking player's current item for PVP deaths.
+#Custom item names may be defined in the 'heroicdeath.items' file.
+    Monster:
+        Zombie:
+            - "%d is definitely NOT on the team when the Zombie Apocalypse comes."
+            - "%d forgot the shotgun."
+            - "%d seems to be missing a brain..."
+        Skeleton:
+            - "Message for you, %d."
+            - "%d shook, rattled, and rolled."
+            - "%d is so boned..."
+        Spider:
+            - "%d was eaten by a spider."
+            - "%d is apparently a fly."
+        Wolf:
+            - "%d got turned into steak."
+        Creeper:
+            - "%d hugged a creeper."
+            - "That's a nice house, %d. Be a ssssssshame if anything happened to it."
+        Gast:
+            - "%d bombed hard."
+        Slime:
+            - "%d drowned in a slime orgy."
+        PigZombie:
+            - "%d got oinked."
+        Giant:
+            - "%d got squashed flat."
+        Blaze:
+            - "%d went looking for a Blaze Rod and found one. It just didn't end up stuck where they wanted it."
+            - "%d burned to death in a choking apocalypse of fire and smoke."
+        CaveSpider:
+            - "%d died frothing at the mouth."
+        EnderDragon:
+            - "Meddle not in the affairs of dragons, %d, for you are crunchy and good with ketchup."
+        Enderman:
+            - "That's The End, %d."
+        IronGolem:
+            - ""
+        MagmaCube:
+            - "Hot, cubic, and painful! %d found a rather unpleasant way to go."
+        Silverfish:
+            - "Sneaky little bastards, aren't they, %d?"
+        Other:
+            - "%d was killed by an unknown monster."
+    Environment:
+        Drown:
+            - "%d is swimming with the fishes."
+            - "%d took a long walk off a short pier."
+            - "%d really, REALLY likes hunting squid."
+            - "%d found Nemo!"
+        Cactus:
+            - "%d poked a cactus, but the cactus poked back."
+            - "%d had a bad peyote trip."
+            - "%d tried using aloe vera the hard way."
+            - "A cactus hugged %d."
+        Fire:
+            - "%d forgot how to stop, drop and roll."
+            - "%d, didn't your mom tell you not to play with matches?"
+            - "Hey, everyone! %d kebabs!"
+        Explosion:
+            - "%d has an explosive personality."
+            - "TNT and %d don't mix."
+        Fall:
+            - "%d took a leap of faith."
+            - "%d tested gravity. Yep, still works!"
+            - "Hey, look at that. Ground 1, %d 0."
+            - "The ground is always watching, %d. Always watching..."
+        Void:
+            - "%d fell into the Gap."
+            - "%d became one with the Underdark."
+            - "%d didn't mind the Gap."
+        Lava:
+            - "%d became obsidian."
+            - "%d took a bath in a lake of fire."
+        Suffocation:
+            - "You might want to investigate a little thing called air, %d."
+            - "%d forgot to breathe."
+        Dispenser:
+            - "%d was ...well, dispensed."
+    PVP:
+        Default:
+            - "%a killed %d wielding %i."
+    Other:
+        Default:
+            - "%d died of unknown causes."
+
+configVer: 1
