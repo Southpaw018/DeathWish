@@ -1,14 +1,14 @@
-package com.MoofIT.Minecraft.AnHero;
+package com.MoofIT.Minecraft.DeathWish;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class AnHeroEntityListener implements Listener {
-	private final AnHero plugin;
+public class DeathWishEntityListener implements Listener {
+	private final DeathWish plugin;
 
-	public AnHeroEntityListener(AnHero instance) {
+	public DeathWishEntityListener(DeathWish instance) {
 		this.plugin = instance;
 	}
 
@@ -26,8 +26,8 @@ public class AnHeroEntityListener implements Listener {
 		       -pve environment
 		       -pvp
 		       -unknown/other
-		   -broadcast messages to players online by world
-		   -print messages to dynmap or irc, maybe?
+		   -broadcast messages to players online by world, configurable
+		   -cooldown for repeated identical deaths within configurable timeframe 
 		   -log to file
 		*/
 	}
