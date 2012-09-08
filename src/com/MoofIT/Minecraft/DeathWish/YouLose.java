@@ -1,5 +1,11 @@
 package com.MoofIT.Minecraft.DeathWish;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -67,7 +73,28 @@ public class YouLose implements Runnable {
 		}
 		if (plugin.printToConsole) DeathWish.log.info("[DeathWish] " + message + "(" + eventWorld.getName() + ":" + eventLocation.toString() + ")"); //TODO better location processing
 
-		//log to file
+		//TODO some of these can probably move to the main class to provide a performance boost
+		if (plugin.logToFile) {
+			StringBuffer filePath = new StringBuffer(plugin.logFile);
+			String logPath = plugin.getDataFolder().getPath();
+			if (plugin.dailyFile) {
+				String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+				filePath.insert(filePath.lastIndexOf(".") - 1, date);
+				logPath += "logs";
+			}
+			if (!new File(logPath).exists()) new File(logPath).mkdirs();
+			File fileHandle = new File(logPath, filePath.toString());
+			BufferedWriter bw;
+			try {
+				bw = new BufferedWriter(new FileWriter(fileHandle));
+				bw.append(message);
+				bw.newLine();
+				bw.close();
+			} catch (IOException exception) {
+				DeathWish.log.severe("[DeathWish] Error saving message to log file.");
+				exception.printStackTrace();
+			}
+		}
 	}
 
 	private String getMessage(EntityDamageEvent dmg) {
