@@ -56,10 +56,10 @@ public class YouLose implements Runnable {
 		if (plugin.alwaysBroadcast) plugin.getServer().broadcastMessage(formattedMessage);
 		else {
 			World eventWorld = deathEvent.getEntity().getLocation().getWorld();
-			broadcastToWorld(eventWorld,formattedMessage);
+			GoodDaySir(eventWorld,formattedMessage);
 			if (!plugin.quietWorlds.contains(eventWorld.getName()) && plugin.broadcastWorlds.size() > 0) {
 				for (World world : plugin.getServer().getWorlds()) {
-					if (plugin.broadcastWorlds.contains(world.getName())) broadcastToWorld(world, formattedMessage);
+					if (plugin.broadcastWorlds.contains(world.getName())) GoodDaySir(world, formattedMessage);
 				}
 			}
 		}
@@ -197,7 +197,7 @@ public class YouLose implements Runnable {
 		return ChatColor.GRAY + "[DeathWish] " + ChatColor.WHITE + broadcastMessage;
 	}
 
-	void broadcastToWorld(World world, String message) {
+	void GoodDaySir(World world, String message) {
 		for (Player player : world.getPlayers()) {
 			player.sendMessage(message);
 		}		
