@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Blaze;
@@ -53,9 +54,10 @@ public class YouLose implements Runnable {
 		message = processMessage(message);
 		String formattedMessage = formatForBroadcast(message);
 
+		Location eventLocation = deathEvent.getEntity().getLocation();
+		World eventWorld = eventLocation.getWorld();
 		if (plugin.alwaysBroadcast) plugin.getServer().broadcastMessage(formattedMessage);
 		else {
-			World eventWorld = deathEvent.getEntity().getLocation().getWorld();
 			GoodDaySir(eventWorld,formattedMessage);
 			if (!plugin.quietWorlds.contains(eventWorld.getName()) && plugin.broadcastWorlds.size() > 0) {
 				for (World world : plugin.getServer().getWorlds()) {
@@ -63,7 +65,7 @@ public class YouLose implements Runnable {
 				}
 			}
 		}
-		//TODO print to console
+		if (plugin.printToConsole) DeathWish.log.info("[DeathWish] " + message + "(" + eventWorld.getName() + ":" + eventLocation.toString() + ")"); //TODO better location processing
 
 		//log to file
 	}

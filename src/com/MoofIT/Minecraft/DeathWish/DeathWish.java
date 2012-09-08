@@ -34,6 +34,7 @@ public class DeathWish extends JavaPlugin {
 	public boolean versionCheck = true;
 
 	//Logging
+	public boolean printToConsole = true;
 	public boolean logToFile = true;
 	public boolean dailyFile = true;
 	public String logFile = "deathlog.csv";
@@ -90,6 +91,7 @@ public class DeathWish extends JavaPlugin {
 		timeFormat = config.getString("Core.timeFormat", timeFormat);
 		versionCheck = config.getBoolean("Core.versionCheck", versionCheck);
 
+		printToConsole = config.getBoolean("Logging.printToConsole", printToConsole);
 		logToFile = config.getBoolean("Logging.logToFile", logToFile);
 		dailyFile = config.getBoolean("Logging.dailyFile", dailyFile);
 		logFile = config.getString("Logging.logFile", logFile);

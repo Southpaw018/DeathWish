@@ -9,6 +9,7 @@ Core:
     timeFormat: "hh:mm a"
     versionCheck: true
 Logging:
+    printToConsole: true
     logToFile: true
     dailyFile: true
     logFile: deathlog.csv
