@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class DeathWishEntityListener implements Listener {
 	private DeathWish plugin;
@@ -28,10 +29,8 @@ public class DeathWishEntityListener implements Listener {
 		}
 	}
 
-	//TODO can we use PlayerDeathEvent.setDeathMessage(String deathMessage) here to override, eliminating the onEntityDeath and YouLose classes entirely?
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void onEntityDeath(EntityDeathEvent event)
-	{
+	public void onEntityDeath(EntityDeathEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
 		Player player = (Player)event.getEntity();
 		if (!player.hasPermission("deathwish.display")) return;
@@ -39,5 +38,11 @@ public class DeathWishEntityListener implements Listener {
 
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,player,dyingPlayers.get(playerName),event));
 		dyingPlayers.remove(playerName);
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onPlayerDeath(PlayerDeathEvent event) {
+		//TODO can we use PlayerDeathEvent.setDeathMessage(String deathMessage) here to override, eliminating the onEntityDeath and YouLose classes entirely?
+		event.setDeathMessage(null);
 	}
 }
