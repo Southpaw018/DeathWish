@@ -15,7 +15,7 @@ DeathWish will override Minecraft's default, generic death messages with whateve
  Permissions
 =============
 deathwish.display - Display this player or group's deaths using DeathWish (default: true)
-deathwish.reload - Allows reloading of the plugin's configuration with /dwreload
+deathwish.reload - Allows reloading of the plugin's configuration with /dwreload (default: op)
 
 =============
  Commands
@@ -24,8 +24,7 @@ User commands:
   None.
 
 Admin commands:
-  /dwreload
-      Reload the plugin's config from file, including all the messages.
+  /dwreload - Reload the plugin's config from file, including all the messages.
 
 =============
  Config
