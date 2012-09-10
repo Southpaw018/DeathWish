@@ -151,6 +151,7 @@ public class DeathWish extends JavaPlugin {
 				p.sendMessage(ChatColor.GRAY + "[DeathWish] " + ChatColor.WHITE + "Configuration reloaded from file.");
 			}
 		}
+		//TODO convert HeroicDeath messages file on command
 		return false;
 	}
 }

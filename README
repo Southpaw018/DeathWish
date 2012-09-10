@@ -1,0 +1,45 @@
+=============
+ Description
+=============
+DeathWish - A HeroicDeath reboot with added snark
+
+DevBukkit: <link>
+Source: https://github.com/Southpaw018/DeathWish
+
+=============
+ Features
+=============
+DeathWish will override Minecraft's default, generic death messages with whatever colorful variants you'd like. That's it!
+
+=============
+ Permissions
+=============
+deathwish.display - Display this player or group's deaths using DeathWish (default: true)
+deathwish.reload - Allows reloading of the plugin's configuration with /dwreload
+
+=============
+ Commands
+=============
+User commands:
+  None.
+
+Admin commands:
+  /dwreload
+      Reload the plugin's config from file, including all the messages.
+
+=============
+ Config
+=============
+See default config file for options and instructions.
+
+=============
+ Credits
+=============
+SquallSeeD31: Squall's original HeroicDeath plugin was much beloved on my server, and it's been missed since he stopped development. In addition to being the sole inspiration for DeathWish, I've used a dozen or so lines of his original code and his original format for messages, so they're compatible. Credit and many thanks to him for his hard work on the original.
+http://forums.bukkit.org/threads/inactive-info-heroicdeath-v1-11-2-customizable-server-broadcasts-on-player-death-1185.3255/
+
+=============
+ Changes
+=============
+[Version 1.0]
+  - Initial Public Release

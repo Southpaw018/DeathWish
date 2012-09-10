@@ -28,6 +28,7 @@ public class DeathWishEntityListener implements Listener {
 		}
 	}
 
+	//TODO can we use PlayerDeathEvent.setDeathMessage(String deathMessage) here to override, eliminating the onEntityDeath and YouLose classes entirely?
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onEntityDeath(EntityDeathEvent event)
 	{
