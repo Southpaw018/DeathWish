@@ -33,6 +33,7 @@ public class DeathWishEntityListener implements Listener {
 	{
 		if (!(event.getEntity() instanceof Player)) return;
 		Player player = (Player)event.getEntity();
+		if (!player.hasPermission("deathwish.display")) return;
 		String playerName = player.getName();
 
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,player,dyingPlayers.get(playerName),event));

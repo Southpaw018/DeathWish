@@ -187,7 +187,7 @@ public class YouLose implements Runnable {
 		return messages.get(random.nextInt(messages.size()));
 	}
 
-	private String processMessage(String finalMessage) {
+	private String processMessage(String finalMessage) { //TODO add %w world processing
 		finalMessage.replace("%d",player.getName());
 		Entity entityKiller = null;
 		Block blockKiller = null;

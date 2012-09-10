@@ -144,9 +144,9 @@ public class DeathWish extends JavaPlugin {
 		if (!(sender instanceof Player)) return false;
 		Player p = (Player)sender;
 		String cmd = command.getName();
-		if (cmd.equalsIgnoreCase("DeathWish")) {
+		if (cmd.equalsIgnoreCase("dwreload")) {
 			if (args.length < 1) return false;
-			if (p.hasPermission("DeathWish.reload") && args[0].equalsIgnoreCase("reload")) {
+			if (p.hasPermission("deathwish.reload") && args[0].equalsIgnoreCase("reload")) {
 				loadConfig();
 				p.sendMessage(ChatColor.GRAY + "[DeathWish] " + ChatColor.WHITE + "Configuration reloaded from file.");
 			}

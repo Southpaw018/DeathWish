@@ -4,3 +4,17 @@ version: 1.0
 description: A reboot of a beloved plugin on my server, HeroicDeath -- just a little more sarcastic this time. 
 author: Southpaw018
 website: http://www.moofit.com
+
+commands:
+    dwreload:
+        description: Reload full configuration from file.
+        usage: /dwreload
+        aliases: [deathwishreload]
+
+permissions:
+    deathwish.display:
+        description: Display this player or group's deaths using the plugin
+        default: true
+    deathwish.reload:
+        description: Allows reloading of the plugin's configuration with /dwreload
+        default: op
