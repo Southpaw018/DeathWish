@@ -148,13 +148,9 @@ public class DeathWish extends JavaPlugin {
 			if (args.length < 1) return false;
 			if (p.hasPermission("DeathWish.reload") && args[0].equalsIgnoreCase("reload")) {
 				loadConfig();
-				sendMessage(p,"Configuration reloaded from file.");
+				p.sendMessage(ChatColor.GRAY + "[DeathWish] " + ChatColor.WHITE + "Configuration reloaded from file.");
 			}
 		}
 		return false;
-	}
-
-	public void sendMessage(Player player, String message) {
-		player.sendMessage(ChatColor.GOLD + "[DeathWish] " + ChatColor.WHITE + message);
 	}
 }
