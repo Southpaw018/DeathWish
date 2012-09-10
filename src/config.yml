@@ -27,7 +27,7 @@ Messages:
         Skeleton:
             - "Message for you, %d."
             - "%d shook, rattled, and rolled."
-            - "%d is so boned..."
+            - "%d is boned."
         Spider:
             - "%d was eaten by a spider."
             - "%d is apparently a fly."
@@ -53,6 +53,7 @@ Messages:
             - "Meddle not in the affairs of dragons, %d, for you are crunchy and good with ketchup."
         Enderman:
             - "That's The End, %d."
+            - "%d was Ended."
         IronGolem:
             - ""
         MagmaCube:
@@ -60,13 +61,14 @@ Messages:
         Silverfish:
             - "Sneaky little bastards, aren't they, %d?"
         Other:
-            - "%d was killed by an unknown monster."
+            - "%d was killed by a %a."
     Environment:
         Drown:
             - "%d is swimming with the fishes."
             - "%d took a long walk off a short pier."
             - "%d really, REALLY likes hunting squid."
             - "%d found Nemo!"
+            - "%d dove in and stayed under until the bubbles stopped."
         Cactus:
             - "%d poked a cactus, but the cactus poked back."
             - "%d had a bad peyote trip."
@@ -93,7 +95,8 @@ Messages:
             - "%d took a bath in a lake of fire."
         Suffocation:
             - "You might want to investigate a little thing called air, %d."
-            - "%d forgot to breathe."
+            - "%d forgot that you can't breathe in %i."
+            - "%d stuck their head in %i and stayed there. Forever."
         Dispenser:
             - "%d was ...well, dispensed."
     PVP:
