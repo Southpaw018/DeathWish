@@ -63,7 +63,7 @@ Messages:
         Other:
             - "%d was killed by a %a."
     Environment:
-        Drown:
+        Drowning:
             - "%d is swimming with the fishes."
             - "%d took a long walk off a short pier."
             - "%d really, REALLY likes hunting squid."
