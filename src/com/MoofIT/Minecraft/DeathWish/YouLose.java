@@ -38,21 +38,18 @@ import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class YouLose implements Runnable {
 	private DeathWish plugin;
-	private Player player;
 	private EntityDamageEvent dmgEvent;
-	private EntityDeathEvent deathEvent;
+	private Player player;
 	private static Random random = new Random();
 
-	public YouLose(DeathWish instance,Player player,EntityDamageEvent dmgEvent,EntityDeathEvent deathEvent) {
+	public YouLose(DeathWish instance,EntityDamageEvent dmgEvent) {
 		this.plugin = instance;
-		this.player = player;
 		this.dmgEvent = dmgEvent;
-		this.deathEvent = deathEvent;
+		this.player = (Player)dmgEvent.getEntity();
 	}
 
 	public void run() {
@@ -60,7 +57,7 @@ public class YouLose implements Runnable {
 		message = processMessage(message);
 		String formattedMessage = formatForBroadcast(message);
 
-		Location eventLocation = deathEvent.getEntity().getLocation();
+		Location eventLocation = player.getLocation();
 		World eventWorld = eventLocation.getWorld();
 		if (plugin.alwaysBroadcast) plugin.getServer().broadcastMessage(formattedMessage);
 		else {
@@ -190,7 +187,7 @@ public class YouLose implements Runnable {
 	private String processMessage(String finalMessage) {
 		//Always replace %d and %w
 		finalMessage.replace("%d",player.getName());
-		finalMessage.replace("%w", dmgEvent.getEntity().getLocation().getWorld().getName());
+		finalMessage.replace("%w", player.getWorld().getName());
 
 		if (!finalMessage.contains("%a") && !finalMessage.contains("%i")) return finalMessage; //Skip the complicated stuff if we can
 
