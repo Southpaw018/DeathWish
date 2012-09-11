@@ -199,8 +199,8 @@ public class YouLose implements Runnable {
 
 	private String processMessage(String finalMessage) {
 		//Always replace %d and %w
-		finalMessage.replace("%d",player.getName());
-		finalMessage.replace("%w", player.getWorld().getName());
+		finalMessage = finalMessage.replace("%d",player.getName());
+		finalMessage = finalMessage.replace("%w", player.getWorld().getName());
 
 		if (!finalMessage.contains("%a") && !finalMessage.contains("%i")) return finalMessage; //Skip the complicated stuff if we can
 
@@ -220,19 +220,19 @@ public class YouLose implements Runnable {
 		}
 
 		if (entityKiller != null && entityKiller instanceof Player) { //PVP death
-			finalMessage.replace("%a",((Player)entityKiller).getName());
+			finalMessage = finalMessage.replace("%a",((Player)entityKiller).getName());
 
 			ItemStack item = ((Player)entityKiller).getItemInHand();
 			int typeID = item.getTypeId();
 			//TODO add damage values
 
-			finalMessage.replace("%i",Integer.toString(typeID)); //TODO item lookup
+			finalMessage = finalMessage.replace("%i",Integer.toString(typeID)); //TODO item lookup
 		}
 		else if (blockKiller != null) { //PvE death
-			finalMessage.replace("%a",Integer.toString(blockKiller.getTypeId())); //TODO block lookup
+			finalMessage = finalMessage.replace("%a",Integer.toString(blockKiller.getTypeId())); //TODO block lookup
 		}
 		else { //Monster death
-			finalMessage.replace("%a",Integer.toString(entityKiller.getEntityId())); //TODO entity lookup
+			finalMessage = finalMessage.replace("%a",Integer.toString(entityKiller.getEntityId())); //TODO entity lookup
 		}
 		return finalMessage;
 	}
