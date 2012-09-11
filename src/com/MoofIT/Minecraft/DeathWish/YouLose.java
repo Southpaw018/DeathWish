@@ -73,7 +73,7 @@ public class YouLose implements Runnable {
 		//TODO some of these can probably move to the main class to provide a performance boost
 		if (plugin.logToFile) {
 			StringBuffer filePath = new StringBuffer(plugin.logFile);
-			String logPath = plugin.getDataFolder().getPath();
+			String logPath = plugin.getDataFolder().getPath() + "/DeathWish"; //TODO test
 			if (plugin.dailyFile) {
 				String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 				filePath.insert(filePath.lastIndexOf(".") - 1, date);
@@ -174,7 +174,7 @@ public class YouLose implements Runnable {
 						Entity e = event.getDamager();
 						if (e instanceof TNTPrimed) messages = plugin.messages.get("TNT");
 						else if (e instanceof Fireball) messages = plugin.messages.get("Ghast");
-						else messages = plugin.messages.get("reeper");
+						else messages = plugin.messages.get("Creeper");
 					} catch (Exception e) {
 						messages = plugin.messages.get("Misc");
 					}
