@@ -7,12 +7,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class DeathWishEntityListener implements Listener {
 	private DeathWish plugin;
 	private static HashMap<String, EntityDamageEvent> dyingPlayers = new HashMap<String, EntityDamageEvent>();
+	private static HashMap<String, Integer> recentDeaths = new HashMap<String, Integer>();
 
 	public DeathWishEntityListener(DeathWish instance) {
 		this.plugin = instance;
@@ -24,23 +26,37 @@ public class DeathWishEntityListener implements Listener {
 		if (!(event.getEntity() instanceof Player))return;
 
 		Player player = (Player)event.getEntity();
-		if (player.getHealth() - event.getDamage() <= 0) {
-			dyingPlayers.put(player.getName(), event);
+		String playerName = player.getName();
+
+		if (recentDeaths.containsKey(playerName)) {
+			recentDeaths.put(playerName, recentDeaths.get(playerName) + 1);
+			return;
 		}
+
+		if (player.getHealth() - event.getDamage() <= 0) dyingPlayers.put(playerName, event);
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onEntityDeath(EntityDeathEvent event) {
 		if (!(event.getEntity() instanceof Player)) return;
-		Player player = (Player)event.getEntity();
+		final Player player = (Player)event.getEntity();
 		if (!player.hasPermission("deathwish.display")) return;
-		String playerName = player.getName();
+		final String playerName = player.getName();
 
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,dyingPlayers.get(playerName)));
+		if (!recentDeaths.containsKey(playerName) && dyingPlayers.containsKey(playerName)) {
+			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,dyingPlayers.get(playerName)));
+		}
 		dyingPlayers.remove(playerName);
 
-		//TODO message cooldown
-	}
+		recentDeaths.put(playerName, 1);
+		plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable() {
+			public void run() {
+				if (plugin.displayCooldownSummary) {
+					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,new EntityDamageEvent(player, DamageCause.CUSTOM, recentDeaths.get(playerName))));
+				}
+				recentDeaths.remove(player.getName());
+			}
+		}, plugin.cooldownTime * 20L);	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerDeath(PlayerDeathEvent event) {

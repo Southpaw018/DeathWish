@@ -165,7 +165,7 @@ public class YouLose implements Runnable {
 					messages = plugin.messages.get("Drowning");
 					break;
 				case BLOCK_EXPLOSION:
-					messages = plugin.messages.get("Misc");
+					messages = plugin.messages.get("Other");
 					break;
 				case ENTITY_EXPLOSION:
 				{
@@ -176,7 +176,7 @@ public class YouLose implements Runnable {
 						else if (e instanceof Fireball) messages = plugin.messages.get("Ghast");
 						else messages = plugin.messages.get("Creeper");
 					} catch (Exception e) {
-						messages = plugin.messages.get("Misc");
+						messages = plugin.messages.get("Other");
 					}
 					break;
 				}
@@ -185,6 +185,9 @@ public class YouLose implements Runnable {
 					break;
 				case LIGHTNING:
 					messages = plugin.messages.get("Lightning");
+					break;
+				case CUSTOM:
+					messages.add("%d died %n more times in the last " + plugin.cooldownTime + " seconds.");
 					break;
 				default:
 					messages = plugin.messages.get("Other");
@@ -202,6 +205,8 @@ public class YouLose implements Runnable {
 		//Always replace %d and %w
 		finalMessage = finalMessage.replace("%d",player.getName());
 		finalMessage = finalMessage.replace("%w", player.getWorld().getName());
+
+		if (finalMessage.contains("%n")) return finalMessage.replace("%n",Integer.toString(dmgEvent.getDamage()));
 
 		if (!finalMessage.contains("%a") && !finalMessage.contains("%i")) return finalMessage; //Skip the complicated stuff if we can
 

@@ -4,6 +4,8 @@ Core:
         #- world1
     broadcastWorlds:
         #- world1
+    cooldownTime: 30
+    displayCooldownSummary: true
     #For formatting, see http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html
     dateFormat: "MM/dd/yyyy"
     timeFormat: "hh:mm a"

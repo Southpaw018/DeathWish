@@ -30,6 +30,8 @@ public class DeathWish extends JavaPlugin {
 	public boolean alwaysBroadcast = true;
 	public List<String> quietWorlds;
 	public List<String> broadcastWorlds;
+	public int cooldownTime;
+	public boolean displayCooldownSummary;
 	public String dateFormat = "MM/dd/yyyy";
 	public String timeFormat = "hh:mm a";
 	public boolean versionCheck = true;
@@ -88,6 +90,9 @@ public class DeathWish extends JavaPlugin {
 		} catch (NullPointerException e) {
 			log.warning("[DeathWish] Configuration failure while loading broadcastWorlds. Using defaults.");
 		}
+		cooldownTime = config.getInt("Core.cooldownTime", cooldownTime);
+		cooldownTime = Math.min(cooldownTime, 60); //60 sec hard cap on cooldown
+		displayCooldownSummary = config.getBoolean("Core.displayCooldownSummary", displayCooldownSummary);
 		dateFormat = config.getString("Core.dateFormat", dateFormat);
 		timeFormat = config.getString("Core.timeFormat", timeFormat);
 		versionCheck = config.getBoolean("Core.versionCheck", versionCheck);
