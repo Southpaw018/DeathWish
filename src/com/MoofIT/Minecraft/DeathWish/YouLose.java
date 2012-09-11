@@ -68,7 +68,7 @@ public class YouLose implements Runnable {
 				}
 			}
 		}
-		if (plugin.printToConsole) DeathWish.log.info("[DeathWish] " + message + "(" + eventWorld.getName() + ":" + eventLocation.toString() + ")"); //TODO better location processing
+		if (plugin.printToConsole) DeathWish.log.info("[DeathWish] Player killed: " + message + ":" + prettyPrintLocation(eventLocation));
 
 		//TODO some of these can probably move to the main class to provide a performance boost
 		if (plugin.logToFile) {
@@ -245,5 +245,21 @@ public class YouLose implements Runnable {
 		for (Player player : world.getPlayers()) {
 			player.sendMessage(message);
 		}		
+	}
+
+	String prettyPrintLocation(Location location) {
+		String prettified = null;
+
+		prettified += "(";
+		prettified += location.getWorld();
+		prettified += ":";
+		prettified += location.getBlockX();
+		prettified += ",";
+		prettified += location.getBlockY();
+		prettified += ",";
+		prettified += location.getBlockZ();
+		prettified += ")";
+
+		return prettified;
 	}
 }
