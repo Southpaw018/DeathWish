@@ -187,8 +187,13 @@ public class YouLose implements Runnable {
 		return messages.get(random.nextInt(messages.size()));
 	}
 
-	private String processMessage(String finalMessage) { //TODO add %w world processing
+	private String processMessage(String finalMessage) {
+		//Always replace %d and %w
 		finalMessage.replace("%d",player.getName());
+		finalMessage.replace("%w", dmgEvent.getEntity().getLocation().getWorld().getName());
+
+		if (!finalMessage.contains("%a") && !finalMessage.contains("%i")) return finalMessage; //Skip the complicated stuff if we can
+
 		Entity entityKiller = null;
 		Block blockKiller = null;
 
