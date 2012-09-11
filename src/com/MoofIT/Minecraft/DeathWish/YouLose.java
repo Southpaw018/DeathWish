@@ -141,23 +141,32 @@ public class YouLose implements Runnable {
 					} else {
 						messages = plugin.messages.get("Other");
 					}
+					break;
 				}
 				case CONTACT:
 					messages = plugin.messages.get("Cactus");
+					break;
 				case SUFFOCATION:
 					messages = plugin.messages.get("Suffocation");
+					break;
 				case FALL:
 					messages = plugin.messages.get("Fall");
+					break;
 				case FIRE:
 					messages = plugin.messages.get("Fire");
+					break;
 				case FIRE_TICK:
 					messages = plugin.messages.get("Burning");
+					break;
 				case LAVA:
 					messages = plugin.messages.get("Lava");
+					break;
 				case DROWNING:
 					messages = plugin.messages.get("Drowning");
+					break;
 				case BLOCK_EXPLOSION:
 					messages = plugin.messages.get("Misc");
+					break;
 				case ENTITY_EXPLOSION:
 				{
 					try {
@@ -169,13 +178,17 @@ public class YouLose implements Runnable {
 					} catch (Exception e) {
 						messages = plugin.messages.get("Misc");
 					}
+					break;
 				}
 				case VOID:
 					messages = plugin.messages.get("Void");
+					break;
 				case LIGHTNING:
 					messages = plugin.messages.get("Lightning");
+					break;
 				default:
 					messages = plugin.messages.get("Other");
+					break;
 			}
 		} catch (NullPointerException e) {
 			DeathWish.log.severe("[DeathWish] Error processing death cause: " + dmg.getCause().toString());
