@@ -190,6 +190,7 @@ public class YouLose implements Runnable {
 					messages = plugin.messages.get("Other");
 					break;
 			}
+			//TODO bugcheck: if messages.length == 0/messages == null, return fallback
 		} catch (NullPointerException e) {
 			DeathWish.log.severe("[DeathWish] Error processing death cause: " + dmg.getCause().toString());
 			messages.add("%d died of unknown causes.");

@@ -19,6 +19,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DeathWish extends JavaPlugin {
+	//TODO bug....messages don't work on first load
 	private final DeathWishEntityListener entityListener = new DeathWishEntityListener(this);
 
 	public static Logger log;

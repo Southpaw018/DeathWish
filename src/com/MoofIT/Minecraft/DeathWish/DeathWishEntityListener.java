@@ -38,6 +38,8 @@ public class DeathWishEntityListener implements Listener {
 
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,dyingPlayers.get(playerName)));
 		dyingPlayers.remove(playerName);
+
+		//TODO message cooldown
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
