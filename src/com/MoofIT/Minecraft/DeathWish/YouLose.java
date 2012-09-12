@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -96,6 +97,7 @@ public class YouLose implements Runnable {
 
 	private String getMessage(EntityDamageEvent dmg) {
 		List<String> messages = null;
+		String cause = null;
 		try {
 			switch (dmg.getCause()) {
 				case ENTITY_ATTACK:
@@ -103,102 +105,103 @@ public class YouLose implements Runnable {
 					EntityDamageByEntityEvent event = (EntityDamageByEntityEvent)dmg;
 					Entity e = event.getDamager();
 					if (e == null) {
-						messages = plugin.messages.get("Dispenser");
+						cause = "Dispenser";
 					} else if (e instanceof Player) {
-						messages = plugin.messages.get("PVP");
+						cause = "PVP";
 					} else if (e instanceof PigZombie) {
-						messages = plugin.messages.get("PigZombie");
+						cause = "PigZombie";
 					} else if (e instanceof Giant) {
-						messages = plugin.messages.get("Giant");
+						cause = "Giant";
 					} else if (e instanceof Zombie) {
-						messages = plugin.messages.get("Zombie");
+						cause = "Zombie";
 					} else if (e instanceof Skeleton) {
-						messages = plugin.messages.get("Skeleton");
+						cause = "Skeleton";
 					} else if (e instanceof Spider) {
-						messages = plugin.messages.get("Spider");
+						cause = "Spider";
 					} else if (e instanceof Creeper) {
-						messages = plugin.messages.get("Creeper");
+						cause = "Creeper";
 					} else if (e instanceof Ghast) {
-						messages = plugin.messages.get("Ghast");
+						cause = "Ghast";
 					} else if (e instanceof Slime) {
-						messages = plugin.messages.get("Slime");
+						cause = "Slime";
 					} else if (e instanceof Wolf) {
-						messages = plugin.messages.get("Wolf");
+						cause = "Wolf";
 					} else if (e instanceof Blaze) {
-						messages = plugin.messages.get("Blaze");
+						cause = "Blaze";
 					} else if (e instanceof CaveSpider) {
-						messages = plugin.messages.get("CaveSpider");
+						cause = "CaveSpider";
 					} else if (e instanceof EnderDragon) {
-						messages = plugin.messages.get("EnderDragon");
+						cause = "EnderDragon";
 					} else if (e instanceof Enderman) {
-						messages = plugin.messages.get(".Enderman");
+						cause = ".Enderman";
 					} else if (e instanceof IronGolem) {
-						messages = plugin.messages.get("IronGolem");
+						cause = "IronGolem";
 					} else if (e instanceof MagmaCube) {
-						messages = plugin.messages.get("MagmaCube");
+						cause = "MagmaCube";
 					} else if (e instanceof Silverfish) {
-						messages = plugin.messages.get("Silverfish");
+						cause = "Silverfish";
 					} else {
-						messages = plugin.messages.get("Other");
+						cause = "Other";
 					}
 					break;
 				}
 				case CONTACT:
-					messages = plugin.messages.get("Cactus");
+					cause = "Cactus";
 					break;
 				case SUFFOCATION:
-					messages = plugin.messages.get("Suffocation");
+					cause = "Suffocation";
 					break;
 				case FALL:
-					messages = plugin.messages.get("Fall");
+					cause = "Fall";
 					break;
 				case FIRE:
-					messages = plugin.messages.get("Fire");
+					cause = "Fire";
 					break;
 				case FIRE_TICK:
-					messages = plugin.messages.get("Burning");
+					cause = "Burning";
 					break;
 				case LAVA:
-					messages = plugin.messages.get("Lava");
+					cause = "Lava";
 					break;
 				case DROWNING:
-					messages = plugin.messages.get("Drowning");
+					cause = "Drowning";
 					break;
 				case BLOCK_EXPLOSION:
-					messages = plugin.messages.get("Other");
+					cause = "Other";
 					break;
 				case ENTITY_EXPLOSION:
 				{
 					try {
 						EntityDamageByEntityEvent event = (EntityDamageByEntityEvent)dmg;
 						Entity e = event.getDamager();
-						if (e instanceof TNTPrimed) messages = plugin.messages.get("TNT");
-						else if (e instanceof Fireball) messages = plugin.messages.get("Ghast");
-						else messages = plugin.messages.get("Creeper");
+						if (e instanceof TNTPrimed) cause = "TNT";
+						else if (e instanceof Fireball) cause = "Ghast";
+						else cause = "Creeper";
 					} catch (Exception e) {
-						messages = plugin.messages.get("Other");
+						cause = "Other";
 					}
 					break;
 				}
 				case VOID:
-					messages = plugin.messages.get("Void");
+					cause = "Void";
 					break;
 				case LIGHTNING:
-					messages = plugin.messages.get("Lightning");
+					cause = "Lightning";
 					break;
 				case CUSTOM:
-					messages.add("%d died %n more times in the last " + plugin.cooldownTime + " seconds.");
+					messages = Arrays.asList("%d died %n more times in the last " + plugin.cooldownTime + " seconds.");
 					break;
 				default:
-					messages = plugin.messages.get("Other");
+					cause = "Other";
 					break;
 			}
-			if (messages == null || messages.size() == 0) messages.add("%d died of unknown causes.");
+			messages = plugin.messages.get(cause);
+			if (messages == null || messages.size() == 0) messages = Arrays.asList("%d died of unknown causes.");
 		} catch (NullPointerException e) {
 			DeathWish.log.severe("[DeathWish] Error processing death cause: " + dmg.getCause().toString());
-			messages.add("%d died of unknown causes.");
+			messages = Arrays.asList("%d died of unknown causes.");
 		}
-		return messages.get(random.nextInt(messages.size()));
+		return messages.get(random.nextInt(messages.size())).concat(plugin.displayDeathCause ? " (" + cause + ")" : null);
 	}
 
 	private String processMessage(String finalMessage) {

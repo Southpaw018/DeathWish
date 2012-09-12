@@ -6,6 +6,7 @@ Core:
         #- world1
     cooldownTime: 30
     displayCooldownSummary: true
+    displayDeathCause: false
     #For formatting, see http://download.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html
     dateFormat: "MM/dd/yyyy"
     timeFormat: "hh:mm a"
