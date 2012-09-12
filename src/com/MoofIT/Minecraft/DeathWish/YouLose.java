@@ -192,14 +192,14 @@ public class YouLose implements Runnable {
 					messages = Arrays.asList("%d died %n more times in the last " + plugin.cooldownTime + " seconds.");
 					break;
 				default:
-					cause = "Other";
+					cause = "Unknown";
 					break;
 			}
 			messages = plugin.messages.get(cause);
-			if (messages == null || messages.size() == 0) messages = Arrays.asList("%d died of unknown causes.");
+			if (messages == null || messages.size() == 0) cause = "Unknown";
 		} catch (NullPointerException e) {
 			DeathWish.log.severe("[DeathWish] Error processing death cause: " + dmg.getCause().toString());
-			messages = Arrays.asList("%d died of unknown causes.");
+			cause = "Unknown";
 		}
 		return messages.get(random.nextInt(messages.size())).concat(plugin.displayDeathCause ? " (" + cause + ")" : null);
 	}

@@ -107,7 +107,7 @@ Messages:
             - "%a killed %d wielding %i."
             - "%d is dead. %a did it in %w with the %i."
     Other:
-        Default:
+        Unknown:
             - "%d died of unknown causes."
 
 configVer: 1
