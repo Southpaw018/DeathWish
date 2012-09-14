@@ -19,7 +19,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DeathWish extends JavaPlugin {
-	//TODO bug....messages don't work on first load
 	private final DeathWishEntityListener entityListener = new DeathWishEntityListener(this);
 
 	public static Logger log;
@@ -73,8 +72,10 @@ public class DeathWish extends JavaPlugin {
 
 		configVer = config.getInt("configVer", configVer);
 		if (configVer == 0) {
-			saveDefaultConfig();
 			log.info("[DeathWish] Configuration error or no config file found. Copying default config file from JAR.");
+			saveDefaultConfig();
+			this.reloadConfig(); //hack to force good data into configs TODO proper defaults
+			config = this.getConfig();
 		}
 		else if (configVer < configCurrent) {
 			log.warning("[DeathWish] Your config file is out of date! Delete your config and reload to see the new options. Proceeding using set options from config file and defaults for new options..." );
@@ -84,12 +85,14 @@ public class DeathWish extends JavaPlugin {
 		try {
 			quietWorlds = config.getStringList("Core.quietWorlds");
 		} catch (NullPointerException e) {
-			log.warning("[DeathWish] Configuration failure while loading quietWorlds. Using defaults.");
+			log.warning("[DeathWish] Configuration failure while loading quietWorlds. Forcing broadcast all.");
+			alwaysBroadcast = true;
 		}
 		try {
 			broadcastWorlds = config.getStringList("Core.broadcastWorlds");
 		} catch (NullPointerException e) {
-			log.warning("[DeathWish] Configuration failure while loading broadcastWorlds. Using defaults.");
+			log.warning("[DeathWish] Configuration failure while loading broadcastWorlds. Forcing broadcast all.");
+			alwaysBroadcast = true;
 		}
 		cooldownTime = config.getInt("Core.cooldownTime", cooldownTime);
 		cooldownTime = Math.min(cooldownTime, 60); //60 sec hard cap on cooldown
