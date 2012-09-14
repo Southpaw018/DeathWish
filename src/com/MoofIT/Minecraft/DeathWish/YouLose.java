@@ -232,16 +232,16 @@ public class YouLose implements Runnable {
 			finalMessage = finalMessage.replace("%a",((Player)entityKiller).getName());
 
 			ItemStack item = ((Player)entityKiller).getItemInHand();
-			int typeID = item.getTypeId();
+			//int typeID = item.getTypeId();
 			//TODO add damage values
 
-			finalMessage = finalMessage.replace("%i",Integer.toString(typeID)); //TODO item lookup
+			finalMessage = finalMessage.replace("%i",item.getType().toString()); //TODO item lookup
 		}
 		else if (blockKiller != null) { //PvE death
-			finalMessage = finalMessage.replace("%a",Integer.toString(blockKiller.getTypeId())); //TODO block lookup
+			finalMessage = finalMessage.replace("%a",blockKiller.getType().toString()); //TODO block lookup
 		}
 		else { //Monster death
-			finalMessage = finalMessage.replace("%a",Integer.toString(entityKiller.getEntityId())); //TODO entity lookup
+			finalMessage = finalMessage.replace("%a",entityKiller.getType().toString()); //TODO entity lookup
 		}
 		return finalMessage;
 	}
