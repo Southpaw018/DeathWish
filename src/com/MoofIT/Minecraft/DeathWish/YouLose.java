@@ -69,7 +69,7 @@ public class YouLose implements Runnable {
 				}
 			}
 		}
-		if (plugin.printToConsole) DeathWish.log.info("[DeathWish] Player killed: " + message + ":" + prettyPrintLocation(eventLocation));
+		if (plugin.printToConsole && !plugin.alwaysBroadcast) DeathWish.log.info("[DeathWish] Player killed: " + message + ":" + prettyPrintLocation(eventLocation));
 
 		//TODO some of these can probably move to the main class to provide a performance boost
 		if (plugin.logToFile) {
