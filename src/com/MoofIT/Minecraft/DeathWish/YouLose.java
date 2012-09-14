@@ -260,7 +260,7 @@ public class YouLose implements Runnable {
 		String prettified = null;
 
 		prettified += "(";
-		prettified += location.getWorld();
+		prettified += location.getWorld().getName();
 		prettified += ":";
 		prettified += location.getBlockX();
 		prettified += ",";
