@@ -201,7 +201,7 @@ public class YouLose implements Runnable {
 			DeathWish.log.severe("[DeathWish] Error processing death cause: " + dmg.getCause().toString());
 			cause = "Unknown";
 		}
-		return messages.get(random.nextInt(messages.size())).concat(plugin.displayDeathCause ? " (" + cause + ")" : null);
+		return messages.get(random.nextInt(messages.size())).concat(plugin.displayDeathCause ? " (" + cause + ")" : "");
 	}
 
 	private String processMessage(String finalMessage) {
