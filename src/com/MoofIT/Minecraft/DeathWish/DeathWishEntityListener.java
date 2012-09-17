@@ -54,7 +54,7 @@ public class DeathWishEntityListener implements Listener {
 				if (plugin.displayCooldownSummary) {
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,new EntityDamageEvent(player, DamageCause.CUSTOM, recentDeaths.get(playerName))));
 				}
-				recentDeaths.remove(player.getName());
+				recentDeaths.remove(playerName);
 			}
 		}, plugin.cooldownTime * 20L);	}
 
