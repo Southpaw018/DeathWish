@@ -51,7 +51,7 @@ public class DeathWishEntityListener implements Listener {
 		recentDeaths.put(playerName, 1);
 		plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new Runnable() {
 			public void run() {
-				if (plugin.displayCooldownSummary) {
+				if (plugin.displayCooldownSummary && recentDeaths.get(playerName) > 1) {
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new YouLose(plugin,new EntityDamageEvent(player, DamageCause.CUSTOM, recentDeaths.get(playerName))));
 				}
 				recentDeaths.remove(playerName);
