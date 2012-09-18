@@ -46,6 +46,7 @@ public class YouLose implements Runnable {
 	private EntityDamageEvent dmgEvent;
 	private Player player;
 	private static Random random = new Random();
+	private String cause = null;
 
 	public YouLose(DeathWish instance,EntityDamageEvent dmgEvent) {
 		this.plugin = instance;
@@ -74,18 +75,30 @@ public class YouLose implements Runnable {
 		//TODO some of these can probably move to the main class to provide a performance boost
 		if (plugin.logToFile) {
 			StringBuffer filePath = new StringBuffer(plugin.logFile);
-			String logPath = plugin.getDataFolder().getPath() + "/DeathWish"; //TODO test
+			String logPath = plugin.getDataFolder().getPath();
+			Date now = new Date();
 			if (plugin.dailyFile) {
-				String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-				filePath.insert(filePath.lastIndexOf(".") - 1, date);
-				logPath += "logs";
+				logPath += "/logs";
+				String date = new SimpleDateFormat("yyyy-MM-dd").format(now);
+				filePath.insert(filePath.lastIndexOf("."), date);
 			}
 			if (!new File(logPath).exists()) new File(logPath).mkdirs();
 			File fileHandle = new File(logPath, filePath.toString());
 			BufferedWriter bw;
 			try {
+				String[] loc = prettyPrintLocation(eventLocation).split(":");
 				bw = new BufferedWriter(new FileWriter(fileHandle));
-				bw.append(message);
+				bw.append(',');
+				bw.append(new SimpleDateFormat(plugin.dateFormat).format(now));
+				bw.append(',');
+				bw.append(new SimpleDateFormat(plugin.timeFormat).format(now));
+				bw.append('"' + new String(message.split("(")[0]).trim() + '"'); //TODO test when showCause is disabled
+				bw.append(',');
+				bw.append(loc[0]);
+				bw.append(',');
+				bw.append(loc[1]);
+				bw.append(',');
+				bw.append(cause);
 				bw.newLine();
 				bw.close();
 			} catch (IOException exception) {
@@ -97,7 +110,6 @@ public class YouLose implements Runnable {
 
 	private String getMessage(EntityDamageEvent dmg) {
 		List<String> messages = null;
-		String cause = null;
 		try {
 			switch (dmg.getCause()) {
 				case ENTITY_ATTACK:
